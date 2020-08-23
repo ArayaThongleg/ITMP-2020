@@ -2,89 +2,52 @@
 <html>
 
 <head>
-	<title> สูตรคูณ วิธีสอง computed </title>
-	<link rel=stylesheet href="../src/reset.css">
-	<link rel=stylesheet href="lab.css">
-	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title> สูตรคูณ วิธีสาม </title>
+    <link rel=stylesheet href="../src/reset.css">
+    <link rel=stylesheet href="lab.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 
 <body>
-	<div id="app">
+    <div id="app">
 
-		<input type="number" v-model="n"> <!-- v- model  เมื่อค่าที่รับมาเปลี่ยน ตัวข้างล่างก็จะเปลี่ยนด้วย-->
+        <input type="number" v-model="n"> <!-- v- model  เมื่อค่าที่รับมาเปลี่ยน ตัวข้างล่างก็จะเปลี่ยนด้วย-->
 
-		<div class="space"></div>
-		<h3>สูตรคูณแม่{{n}}</h3>
-		<h4>{{n}} x 1 = {{t1}}</h4>
-		<h4>{{n}} x 2 = {{t2}}</h4>
-		<h4>{{n}} x 3 = {{t3}}</h4>
-		<h4>{{n}} x 4 = {{t4}}</h4>
-		<h4>{{n}} x 5 = {{t5}}</h4>
-		<h4>{{n}} x 6 = {{t6}}</h4>
-		<h4>{{n}} x 7 = {{t7}}</h4>
-		<h4>{{n}} x 8 = {{t8}}</h4>
-		<h4>{{n}} x 9 = {{t9}}</h4>
-		<h4>{{n}} x 10 = {{t10}}</h4>
-		<h4>{{n}} x 11 = {{t11}}</h4>
-		<h4>{{n}} x 12 = {{t12}}</h4>
-	</div>
+        <div class="space"></div>
+        <h3>สูตรคูณแม่ {{n}}</h3>
+        <h3 
+        v-for="i in 12" 
+        >
+            {{n}} x {{i}} = {{x(i)}}</h3>
 
-	<script src="index.js"></script>
-	<script>
-		// #app --- > เป็น id จากข้างบน
+    </div>
 
-		let app = new Vue({
+    <script src="index.js"></script>
+    <script>
+        // #app --- > เป็น id จากข้างบน
 
-			el: "#app",
-			data: {
-				n: 0
-			},
-			computed: {
-				t1: function () {
-					return this.n * 1
-				},
-				t2: function () {
-					return this.n * 2
-				},
-				t3: function () {
-					return this.n * 3
-				},
-				t4: function () {
-					return this.n * 4
-				},
-				t5: function () {
-					return this.n * 5
-				},
-				t6: function () {
-					return this.n * 6
-				},
-				t7: function () {
-					return this.n * 7
-				},
-				t8: function () {
-					return this.n * 8
-				},
-				t9: function () {
-					return this.n * 9
-				},
-				t10: function () {
-					return this.n * 10
-				},
-				t11: function () {
-					return this.n * 11
-				},
-				t12: function () {
-					return this.n * 12
-				},
+        let app = new Vue({
+			
+
+            el: "#app",
+            data: {
+                n: 2
+            },
+            methods: {
+                x : function(row) {
+                    return this.n * row
+                }
+				
+            
 
 
-			}
+        }
 
 
 
 
 		})
-	</script>
+    </script>
 </body>
 
 </html>
