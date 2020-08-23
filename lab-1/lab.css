@@ -1,0 +1,30 @@
+body {
+    background-color:#4a0e58a8;
+  }
+  div {
+    margin-bottom: 100px;
+  }
+  
+  h3 {
+    text-shadow: 2px 2px 5px #666561;
+    color: beige;
+  }
+  
+  h4 {
+    color: rgb(36, 34, 104);
+
+  }
+  
+  h5 {
+    color: rgba(39, 40, 41, 0.767);
+
+  }
+
+
+  #yellow {
+     background-color:#ff0080bd;
+     padding-bottom: 50px;
+    
+
+  }
+  
