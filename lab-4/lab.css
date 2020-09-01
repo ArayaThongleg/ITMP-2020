@@ -39,7 +39,6 @@ a-dot{
 	--row:3;
 	--h:20;
 	--l:50%;
-	
 	--size: calc((100% / var(--row)) - 2%);
 	width: var(--size);
 	height: var(--size);
