@@ -37,16 +37,20 @@ main{
 }
 a-dot{
 	--row:3;
-	--h:330;
+	--h:20;
 	--l:50%;
+	
 	--size: calc((100% / var(--row)) - 2%);
 	width: var(--size);
 	height: var(--size);
-	margin:1%;
+	margin: 0.3%;
 	background-color: hsl(var(--h),100%,var(--l));
 	display: inline-block;
 	border-radius: 100%;
-	cursor: pointer;
+	cursor: grabbing;
+	border-style: dotted;
+
+
 }
 
 a-dot[data-pick="true"]{
