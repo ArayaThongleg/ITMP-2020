@@ -19,19 +19,19 @@
 				<div class="box _path" 
 				v-for="i in 14" 
 				:data-pst="i"></div>
-				<div class="box _toggle" data-pst="10" data-isrightarrow="1"></div>
+				<div class="box _toggle" data-pst="10" data-isrightarrow="isRightArrow"></div>
 
 				<div class="box _fruit" v-for="f in fruits" 
-				:data-pst="f.pst"></div> <!-- ?? -->
+				:data-pst="f.pst" :data-type="f.type"></div> <!-- ?? -->
 
 				<div class="box _origin"></div>
-				<div class="box _12" data-pst="12"></div>
+				<div class="box _12" data-pst="12" ></div>
 				<div class="box _16" data-pst="16"></div>
 				
 			</main>
 		</section>
 		<section id="canvas_footer">
-			<div v-if="play" class="btn" id="toggle">
+			<div v-if="play" class="btn" id="toggle" @click="click()">
 				Toggle
 			</div>
 			<div v-if="!play" class="btn" id="endgame">
@@ -46,7 +46,7 @@
 			return Math.floor(Math.random()*100%shift)+start
 		}
 		
-		let nextFruitId = 3 // == id
+		let fruitCount = 3 // == id
 		let isRightArrow = 1
 		let speed = 1000
 		let app = new Vue({
@@ -59,23 +59,66 @@
 				score:0,
 				fruits:[ //ให้เป็นอาเรย์เพื่อเก็บค่า pst ช position begin
 					{id:1,type:'red',pst:5,run:true,step:1}, // run ยังขยับได้อยู่หรือเปล่า
-					{id:2,type:'red',pst:2,run:true,step:1}, // step เอามาบวกทีละ 1,3
+					{id:2,type:'yellow',pst:2,run:true,step:1}, // step เอามาบวกทีละ 1,3
 					
 				]
 			},
 
-			method:{},
+			method:{
+
+				click: function () {
+					if (this.isRightArrow == 1) {
+						this.isRightArrow = 0
+						console.log("isRightArrow = 0")
+					} else if (this.isRightArrow == 0) {
+						this.isRightArrow = 1
+						console.log("isRightArrow = 1")
+					}
+				},
+			},
 			computed:{},
 			watch:{
 				turn: function(x){
 					let count = this.fruits.length
-					for (let f in this.fruits){
+
+					for (let f in this.fruits) {
 						let run = this.fruits[f].run
-						if (run){
-							this.fruits[f].pst = this.fruits[f].pst+1
-						}
-						console.log()
-						}
+						if (run) {
+							this.fruits[f].pst += this.fruits[f].step
+						}//  เดิน
+						if (this.fruits[f].pst == 11 && this.isRightArrow == 1) {
+							this.fruits[f].pst = 13
+							this.fruits[f].step = 3
+						}// สลับสี
+						if (this.fruits[f].pst == 12 || this.fruits[f].pst == 16) {
+							if (this.fruits[f].pst == 16 && this.fruits[f].type == "yellow" && this.fruits[f].run == true) {
+								//console.log("Collect @#@As")
+								this.score++
+								this.fruits[f].run = false
+
+							} else if (this.fruits[f].pst == 12 && this.fruits[f].type == "red" && this.fruits[f].run == true) {
+								//console.log("Collect @#@As")
+								this.score++
+								this.fruits[f].run = false
+
+							} else if (this.fruits[f].pst == 12 && this.fruits[f].type == "yellow") {
+								clearInterval(playing)
+								this.play = false
+							} else if (this.fruits[f].pst == 16 && this.fruits[f].type == "red") {
+								clearInterval(playing)
+								this.play = false
+							}//จบเกม
+						}// หยุด
+						//console.log(this.fruits[f].pst)
+					}
+					if (rand(1, 10) % 3 == 1) {
+						this.fruits.push({ id: fruitCount, type: 'red', pst: 1, run: true, step: 1 })
+						fruitCount++
+					} else if (rand(1, 10) % 3 == 0) {
+						this.fruits.push({ id: fruitCount, type: 'yellow', pst: 1, run: true, step: 1 })
+						fruitCount++
+					}
+					console.log(this.speed)
 				}
 			}
 		})
